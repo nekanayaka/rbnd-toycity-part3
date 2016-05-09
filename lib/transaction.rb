@@ -5,10 +5,15 @@ class Transaction
   @@id = 1
   @@transactions = []
 
-  def initialize(params)
+  def initialize(customer, product)
     @id = @@id
-    @@id++
-    @customer = params[:customer]
-    @product = params[:product]
+    @@id += 1
+    @customer = customer
+    @product = product
+    @@transactions << self
+  end
+
+  def self.all
+    @@transactions
   end
 end
