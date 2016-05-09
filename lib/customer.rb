@@ -1,3 +1,4 @@
+require_relative "transaction"
 class Customer
   attr_accessor :name
   @@customers = []
@@ -18,5 +19,10 @@ class Customer
 
   def self.all
     @@customers
+  end
+
+  def purchase(product)
+    self_transaction = Transaction.new(self, product)
+    puts "#{product.title} Purchased by #{self.name}"
   end
 end
