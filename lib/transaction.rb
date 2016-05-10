@@ -11,12 +11,13 @@ class Transaction
     @customer = customer
     @product = product
     @@transactions << self
+    @product.stock -= 1
   end
 
   def self.all
     @@transactions
   end
-  
+
   def self.find(transaction_index)
     @@transactions[transaction_index - 1]
   end
