@@ -22,7 +22,11 @@ class Customer
   end
 
   def purchase(product)
-    self_transaction = Transaction.new(self, product)
-    puts "#{product.title} Purchased by #{self.name}"
+    if product.stock > 0
+      self_transaction = Transaction.new(self, product)
+      puts "#{product.title} Purchased by #{self.name}"
+    else
+      raise OutOfStockError, "#{product.title} is out of stock."
+    end
   end
 end

@@ -16,4 +16,8 @@ class Transaction
   def self.all
     @@transactions
   end
+  
+  def self.find(transaction_index)
+    @@transactions[transaction_index - 1]
+  end
 end
