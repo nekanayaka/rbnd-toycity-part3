@@ -3,12 +3,12 @@ class Product
 
     @@products = []
 
-    def initialize(params)
-      @title = params[:title]
+    def initialize(title, params)
+      @title = title
       @price = params[:price]
       @stock = params[:stock]
 
-      if @@products.find {|product| @title == product.title}
+      if Product.find_by_title(@title)
         raise DuplicateProductError, "#{@title} already exists."
       else
         @@products << self
@@ -25,13 +25,13 @@ class Product
     end
 
     def in_stock?
-      self.stock != 0
+      self.stock > 0
     end
 
     def self.in_stock
       products_with_stock = []
       for product in @@products
-        if product.stock != 0
+        if product.in_stock?
           products_with_stock.push(product)
         end
       end

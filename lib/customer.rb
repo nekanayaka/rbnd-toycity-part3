@@ -3,10 +3,10 @@ class Customer
   attr_accessor :name
   @@customers = []
 
-  def initialize(params)
-    @name = params[:name]
+  def initialize(name)
+    @name = name
 
-    if @@customers.find {|customer| @name == customer.name}
+    if Customer.find_by_name(@name)
       raise DuplicateCustomerError, "#{@name} already exists."
     else
       @@customers << self
@@ -22,7 +22,7 @@ class Customer
   end
 
   def purchase(product)
-    if product.stock > 0
+    if product.in_stock?
       self_transaction = Transaction.new(self, product)
       puts "#{product.title} Purchased by #{self.name}"
     else
