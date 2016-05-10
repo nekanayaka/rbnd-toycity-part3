@@ -1,0 +1,6 @@
+* Spent about a day working on this project.
+* Trying to iterate through an empty array.
+* Additional features.
+    * Purchase method prints product name and customer name.
+    * Uses the find method to look up the titles in the products.
+* Ruby specific syntax.
