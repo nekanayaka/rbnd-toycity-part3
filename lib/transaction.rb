@@ -6,12 +6,16 @@ class Transaction
   @@transactions = []
 
   def initialize(customer, product)
-    @id = @@id
-    @@id += 1
-    @customer = customer
-    @product = product
-    @@transactions << self
-    @product.stock -= 1
+    if product.in_stock?
+      @id = @@id
+      @@id += 1
+      @customer = customer
+      @product = product
+      @@transactions << self
+      @product.stock -= 1
+    else
+      raise OutOfStockError, "#{product.title} is out of stock."
+    end
   end
 
   def self.all
